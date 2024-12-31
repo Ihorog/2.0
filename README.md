@@ -32,3 +32,36 @@ The bot is restricted to access only specific directories and files to avoid acc
 
 ## Documentation
 Keep the documentation up-to-date regarding the bot's commands and functionalities to simplify its usage and further development.
+
+## Detailed Instructions to Start the Project
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Ihorog/2.0.git
+   cd 2.0
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Update `config.json` with your OpenAI API key**:
+   Open the `config.json` file and replace `"your_openai_api_key"` with your actual OpenAI API key:
+   ```json
+   {
+       "openai_api_key": "your_actual_openai_api_key"
+   }
+   ```
+
+4. **Run the bot**:
+   ```bash
+   python bot.py
+   ```
+
+5. **Interact with the bot**:
+   - Input your commands as described in the "New Commands and Functionalities" section.
+   - For example, to create a file, you can use:
+     ```bash
+     create_file example.txt "This is an example file."
+     ```
