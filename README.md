@@ -32,3 +32,13 @@ The bot is restricted to access only specific directories and files to avoid acc
 
 ## Documentation
 Keep the documentation up-to-date regarding the bot's commands and functionalities to simplify its usage and further development.
+
+## Integrating OpenAI API with Python
+
+To integrate the OpenAI API with Python, follow these steps:
+
+1. Install the OpenAI Python package by adding `openai` to your `requirements.txt` file and running `pip install -r requirements.txt`.
+2. Obtain your OpenAI API key and add it to a configuration file, such as `config.json`.
+3. Import the OpenAI package in your Python script, as shown in `bot.py`.
+4. Load your API key from the configuration file and set it using `openai.api_key`.
+5. Use the `openai.ChatCompletion.create` method to interact with the OpenAI API, as demonstrated in the `ask_chatgpt` function in `bot.py`.
