@@ -14,29 +14,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Run linter for code quality
       - name: Lint with flake8
         run: |
           pip install flake8
           flake8 .
 
-      # 5. Run tests
       - name: Run tests with pytest
         run: |
           pip install pytest
@@ -48,21 +43,17 @@ jobs:
     needs: setup-and-test
 
     steps:
-      # 1. Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Build Docker image (optional)
-      - name: Build Docker image
+      - name: Build Docker image (optional)
         run: |
           docker build -t cimeika:latest .
 
-      # 3. Validate environment variables
       - name: Validate .env file
         run: |
           test -f .env && echo ".env file exists" || echo "Missing .env file"
 
-      # 4. Run final pre-deployment checks
       - name: Final pre-deployment validation
         run: |
           echo "All components are ready for deployment!"
