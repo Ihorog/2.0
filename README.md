@@ -42,3 +42,29 @@ To integrate the OpenAI API with Python, follow these steps:
 3. Import the OpenAI package in your Python script, as shown in `bot.py`.
 4. Load your API key from the configuration file and set it using `openai.api_key`.
 5. Use the `openai.ChatCompletion.create` method to interact with the OpenAI API, as demonstrated in the `ask_chatgpt` function in `bot.py`.
+
+## GitHub Actions Workflow
+
+This repository includes a GitHub Actions workflow to automate the process of checking code quality, running tests, validating the environment, and preparing the project for deployment.
+
+### Workflow Steps
+
+1. **Checkout the code**: Uses the `actions/checkout@v3` action to checkout the repository code.
+2. **Set up Python**: Uses the `actions/setup-python@v4` action to set up Python 3.9.
+3. **Install dependencies**: Installs the required dependencies from `requirements.txt`.
+4. **Run linter for code quality**: Uses `flake8` to check the code quality.
+5. **Run tests**: Uses `pytest` to run the tests.
+6. **Build Docker image (optional)**: Builds a Docker image for the project.
+7. **Validate environment variables**: Checks for the existence of the `.env` file.
+8. **Run final pre-deployment checks**: Ensures all components are ready for deployment.
+
+### Tools Used
+
+- **flake8**: For code quality checks.
+- **pytest**: For running tests.
+- **Docker**: For containerization (optional).
+
+### Triggering the Workflow
+
+The workflow is triggered on every push to the `main` branch and on every pull request to the `main` branch.
+

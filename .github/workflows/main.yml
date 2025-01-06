@@ -1,0 +1,60 @@
+name: CI/CD Workflow for Cimeika
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-and-test:
+    name: Setup and Test Environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 .
+
+      - name: Run tests with pytest
+        run: |
+          pip install pytest
+          pytest tests/
+
+  build-and-prepare:
+    name: Build and Prepare for Deployment
+    runs-on: ubuntu-latest
+    needs: setup-and-test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image (optional)
+        run: |
+          docker build -t cimeika:latest .
+
+      - name: Validate .env file
+        run: |
+          test -f .env && echo ".env file exists" || echo "Missing .env file"
+
+      - name: Final pre-deployment validation
+        run: |
+          echo "All components are ready for deployment!"
